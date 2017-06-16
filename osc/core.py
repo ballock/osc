@@ -3298,6 +3298,9 @@ def http_request(method, url, headers={}, data=None, file=None):
             data = bytes(data, "utf-8")
         fd = urlopen(req, data=data)
 
+    except Exception as e:
+        raise Exception("Error trying to open URL %s: %s " % (url, e))
+
     finally:
         if hasattr(conf.cookiejar, 'save'):
             conf.cookiejar.save(ignore_discard=True)
